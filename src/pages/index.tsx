@@ -1,3 +1,8 @@
-export default function Page() {
-  return <h1>Hello, Next.js!</h1>
+import Header from "@/components/header";
+
+export default function Index() {
+  return <>
+  <Header/>
+
+  </>
 }
