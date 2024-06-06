@@ -1,10 +1,34 @@
 // pages/index.tsx
+import { AddButton } from '@/components/addButton';
 import Carousel from '@/components/carousel';
+import ProductCard from '@/components/productCard';
 import Link from 'next/link';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+
+
 
 const HomePage: React.FC = () => {
+
+  // const [message, setMessage] = useState("Loading")
+
+
+  // useEffect(() =>{
+  //   fetch("http://localhost:8081").then(
+  //     response => response.json()
+  //   ).then(
+  //     data => {
+  //       console.log(data)
+  //       setMessage(data.message)
+  //     }
+  //   )
+  //   // On ouvre un tableau vide pour éviter que la commande ne soit envoyée plusieurs fois
+  // }, [])
+
+
   return (
+
+    // <div>{message}</div>
+    
     <div className="bg-white text-gray-900">
       <main className="container mx-auto p-4">
         <section className="text-center my-8">
@@ -32,7 +56,6 @@ const HomePage: React.FC = () => {
             </div>
           </div>
         </section>
-
         <section className="my-8">
           <h2 className="text-2xl font-bold text-center">Conseils & Astuces</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -58,6 +81,8 @@ const HomePage: React.FC = () => {
         </section>
       </main>
     </div>
+
+
   )
 }
 
