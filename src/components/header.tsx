@@ -38,11 +38,11 @@ export default function Header() {
       </header>
       <nav className="bg-white py-2">
         <ul className="flex justify-around space-x-8 text-black">
-          <li><Link href="#"><span className="hover:underline">Les Produits</span></Link></li>
-          <li><Link href="#"><span className="hover:underline">Vos Besoins</span></Link></li>
-          <li><Link href="#"><span className="hover:underline">Conseils & Astuces</span></Link></li>
-          <li><Link href="#"><span className="hover:underline">DIY</span></Link></li>
-          <li><Link href="#"><span className="hover:underline">Pharmacies Partenaires</span></Link></li>
+          <li><Link href="/productpage"><span className="hover:underline">Les Produits</span></Link></li>
+          <li><Link href="/besoins"><span className="hover:underline">Vos Besoins</span></Link></li>
+          <li><Link href="/conseils"><span className="hover:underline">Conseils & Astuces</span></Link></li>
+          <li><Link href="/diy"><span className="hover:underline">DIY</span></Link></li>
+          <li><Link href="/partenaires"><span className="hover:underline">Pharmacies Partenaires</span></Link></li>
         </ul>
       </nav>
     </>

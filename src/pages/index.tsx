@@ -38,19 +38,18 @@ const HomePage: React.FC = () => {
 
           <Carousel />
 
-
         <section className="my-8">
           <h2 className="text-2xl font-bold text-center">Promotion du Jour</h2>
           <div className="flex justify-around">
             <div className="bg-gray-100 p-4 rounded shadow-md">
               <img src="/assets/images/produits/promo_1.png" alt="Product 1" className="w-full"/>
-              <button className="mt-2 bg-black text-white py-2 px-4 rounded">Je découvre</button>
+              <button className="mt-2 bg-fuchsia-800 text-white py-2 px-4 rounded">Je découvre</button>
               <p className="mt-2">Silhouette affinée et meilleur confort</p>
               <p className="font-bold">20,90 €</p>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow-md">
               <img src="/assets/images/produits/promo_2.png" alt="Product 2" className="w-full"/>
-              <button className="mt-2 bg-black text-white py-2 px-4 rounded">Je découvre</button>
+              <button className="mt-2 bg-fuchsia-800 text-white py-2 px-4 rounded">Je découvre</button>
               <p className="mt-2">Indispensable d'une santé en fer</p>
               <p className="font-bold">25,90 €</p>
             </div>
