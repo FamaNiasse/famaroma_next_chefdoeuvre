@@ -20,10 +20,10 @@ export default function Carousel() {
             <div className="relative w-full h-96">
               <Image 
                 src="/assets/images/produits/omega3-promo.png" 
-                alt="Product 1" 
+                alt="" 
                 layout="fill" 
                 objectFit="cover" 
-                objectPosition="top" 
+                objectPosition="center" 
                 className="w-full h-auto"
               />
             </div>
@@ -31,11 +31,11 @@ export default function Carousel() {
           <SwiperSlide>
             <div className="relative w-full h-96">
               <Image 
-                src="/assets/images/produits/promo_1.png" 
+                src="/assets/images/imgenerate/carousel_1.jpg" 
                 alt="Product 2" 
                 layout="fill" 
                 objectFit="cover" 
-                objectPosition="top" 
+                objectPosition="center" 
                 className="w-full h-auto"
               />
             </div>
@@ -47,7 +47,7 @@ export default function Carousel() {
                 alt="Product 3" 
                 layout="fill" 
                 objectFit="cover" 
-                objectPosition="top" 
+                objectPosition="center" 
                 className="w-full h-auto"
               />
             </div>
@@ -59,7 +59,7 @@ export default function Carousel() {
                 alt="Product 4" 
                 layout="fill" 
                 objectFit="cover" 
-                objectPosition="top" 
+                objectPosition="center" 
                 className="w-full h-auto"
               />
             </div>
@@ -71,7 +71,7 @@ export default function Carousel() {
                 alt="Product 5" 
                 layout="fill" 
                 objectFit="cover" 
-                objectPosition="top" 
+                objectPosition="center" 
                 className="w-full h-auto"
               />
             </div>
@@ -83,7 +83,7 @@ export default function Carousel() {
                 alt="Product 6" 
                 layout="fill" 
                 objectFit="cover" 
-                objectPosition="top" 
+                objectPosition="center" 
                 className="w-full h-auto"
               />
             </div>

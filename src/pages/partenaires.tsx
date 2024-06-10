@@ -1,7 +1,7 @@
 export default function Partenaires() {
     return (
         <div>
-            Partenaire
+            Partenaires
         </div>
     )
 }
