@@ -1,0 +1,17 @@
+.swiper-button-next,
+.swiper-button-prev {
+  @apply text-fuchsia-800; /* Utilisation de Tailwind CSS pour la couleur */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  @apply text-5xl; /* Utilisation de Tailwind CSS pour la taille du texte */
+}
+
+.swiper-pagination-bullet {
+    @apply bg-fuchsia-800; /* Utilisation de Tailwind CSS pour la couleur des bullets */
+  }
+  
+  .swiper-pagination-bullet-active {
+    @apply bg-fuchsia-800; /* Utilisation de Tailwind CSS pour la couleur active des bullets */
+  }
