@@ -11,13 +11,14 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/login', { email, password });
+      const response = await axios.post('http://localhost:8081/users/login', { email, password });
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         router.push('/dashboard'); // Redirige vers le tableau de bord après connexion
       }
     } catch (error) {
       setError('Login failed. Please check your credentials and try again.');
+      console.error('Login error:', error);
     }
   };
 
@@ -35,7 +36,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-indigo-200 focus:border-indigo-400"
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-fuchsia-200 focus:border-fuchsia-400"
             />
           </div>
           <div>
@@ -46,20 +47,20 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-indigo-200 focus:border-indigo-400"
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-fuchsia-200 focus:border-fuchsia-400"
             />
           </div>
           <div>
             <button
               type="submit"
-              className="w-full px-4 py-2 mt-4 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700"
+              className="w-full px-4 py-2 mt-4 text-white bg-fuchsia-600 rounded-md hover:bg-fuchsia-700 focus:outline-none focus:bg-fuchsia-700"
             >
               Login
             </button>
           </div>
         </form>
         <p className="text-center">
-          Don't have an account? <a href="/signup" className="text-indigo-600">Sign Up</a>
+          Vous n'avez pas de compte ? <a href="/signup" className="text-fuchsia-600">Inscrivez-vous</a>
         </p>
       </div>
     </div>
