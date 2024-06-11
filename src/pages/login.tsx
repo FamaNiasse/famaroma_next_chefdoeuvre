@@ -12,9 +12,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8081/users/login', { email, password });
+      console.log('Login response:', response.data);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
-        router.push('/dashboard'); // Redirige vers le tableau de bord après connexion
+        router.push('/admin-dashboard'); // Redirige vers le tableau de bord admin après connexionx
+      }else{
+        router.push('dashboard'); // Redirige vers le tableau de bord user après connexionx
       }
     } catch (error) {
       setError('Login failed. Please check your credentials and try again.');
