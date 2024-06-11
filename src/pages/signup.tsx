@@ -6,18 +6,20 @@ const Signup = () => {
   const [pseudo, setPseudo] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState(0); // Par défaut, le rôle est 'user'
   const [error, setError] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/signup', { pseudo, email, password });
+      const response = await axios.post('http://localhost:8081/users/signup', { pseudo, email, password, role });
       if (response.status === 201) {
         router.push('/login'); // Redirige vers la page de connexion après inscription réussie
       }
     } catch (error) {
       setError('Signup failed. Please check your inputs and try again.');
+      console.error('Signup error:', error);
     }
   };
 
@@ -35,7 +37,7 @@ const Signup = () => {
               value={pseudo}
               onChange={(e) => setPseudo(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-indigo-200 focus:border-indigo-400"
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-fuchsia-200 focus:border-fuchsia-400"
             />
           </div>
           <div>
@@ -46,7 +48,7 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-indigo-200 focus:border-indigo-400"
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-fuchsia-200 focus:border-fuchsia-400"
             />
           </div>
           <div>
@@ -57,20 +59,33 @@ const Signup = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-indigo-200 focus:border-indigo-400"
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-fuchsia-200 focus:border-fuchsia-400"
             />
+          </div>
+          <div>
+            <label htmlFor="role" className="block text-sm">Role</label>
+            <select
+              id="role"
+              value={role}
+              onChange={(e) => setRole(parseInt(e.target.value))}
+              required
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-fuchsia-200 focus:border-fuchsia-400"
+            >
+              <option value={0}>User</option>
+              <option value={1}>Admin</option>
+            </select>
           </div>
           <div>
             <button
               type="submit"
-              className="w-full px-4 py-2 mt-4 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700"
+              className="w-full px-4 py-2 mt-4 text-white bg-fuchsia-600 rounded-md hover:bg-fuchsia-700 focus:outline-none focus:bg-fuchsia-700"
             >
               Sign Up
             </button>
           </div>
         </form>
         <p className="text-center">
-          Already have an account? <a href="/login" className="text-indigo-600">Login</a>
+          Vous avez déjà un compte ? <a href="/login" className="text-fuchsia-600">Connexion</a>
         </p>
       </div>
     </div>

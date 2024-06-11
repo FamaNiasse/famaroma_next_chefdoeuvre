@@ -31,7 +31,7 @@ export default function Carousel() {
           <SwiperSlide>
             <div className="relative w-full h-96">
               <Image 
-                src="/assets/images/imgenerate/carousel_1.jpg" 
+                src="/assets/images/produits/omega3-promo.png" 
                 alt="Product 2" 
                 layout="fill" 
                 objectFit="cover" 
@@ -43,7 +43,7 @@ export default function Carousel() {
           <SwiperSlide>
             <div className="relative w-full h-96">
               <Image 
-                src="/assets/images/produits/promo_2.png" 
+                src="/assets/images/produits/omega3-promo.png" 
                 alt="Product 3" 
                 layout="fill" 
                 objectFit="cover" 
@@ -55,7 +55,7 @@ export default function Carousel() {
           <SwiperSlide>
             <div className="relative w-full h-96">
               <Image 
-                src="/assets/images/produits/promo_3.png" 
+                src="/assets/images/produits/omega3-promo.png" 
                 alt="Product 4" 
                 layout="fill" 
                 objectFit="cover" 
@@ -67,7 +67,7 @@ export default function Carousel() {
           <SwiperSlide>
             <div className="relative w-full h-96">
               <Image 
-                src="/assets/images/produits/promo_4.png" 
+                src="/assets/images/produits/omega3-promo.png" 
                 alt="Product 5" 
                 layout="fill" 
                 objectFit="cover" 
@@ -79,7 +79,7 @@ export default function Carousel() {
           <SwiperSlide>
             <div className="relative w-full h-96">
               <Image 
-                src="/assets/images/produits/promo_5.png" 
+                src="/assets/images/produits/omega3-promo.png" 
                 alt="Product 6" 
                 layout="fill" 
                 objectFit="cover" 
