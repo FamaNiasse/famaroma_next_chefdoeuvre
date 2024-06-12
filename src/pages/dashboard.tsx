@@ -71,7 +71,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">User Dashboard</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Utilisateur</h2>
         <div className="mb-4">
           <label className="block text-gray-700">Pseudo</label>
           <input

@@ -63,19 +63,6 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label htmlFor="role" className="block text-sm">Role</label>
-            <select
-              id="role"
-              value={role}
-              onChange={(e) => setRole(parseInt(e.target.value))}
-              required
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-fuchsia-200 focus:border-fuchsia-400"
-            >
-              <option value={0}>User</option>
-              <option value={1}>Admin</option>
-            </select>
-          </div>
-          <div>
             <button
               type="submit"
               className="w-full px-4 py-2 mt-4 text-white bg-fuchsia-600 rounded-md hover:bg-fuchsia-700 focus:outline-none focus:bg-fuchsia-700"
