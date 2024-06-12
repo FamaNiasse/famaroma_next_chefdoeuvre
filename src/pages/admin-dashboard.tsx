@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { FaSearch, FaTrashAlt, FaEdit, FaPlus } from 'react-icons/fa';
+import UserModal from '@/components/userModale';
+
 
 interface User {
   id: number;
   pseudo: string;
   email: string;
-  username: string; // Ajoute cette propriété si nécessaire
+  username: string;
   role: number;
 }
 
@@ -15,6 +17,8 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -69,18 +73,42 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleEdit = (userId: number) => {
-    // Redirige vers une page d'édition ou ouvre un modal pour modifier l'utilisateur
-    console.log('Edit user with ID:', userId);
-    // Exemple de redirection :
-    router.push(`/edit-user/${userId}`);
+  const handleEdit = (user: User) => {
+    setSelectedUser(user);
+    setIsModalOpen(true);
   };
 
   const handleAdd = () => {
-    // Redirige vers une page d'ajout ou ouvre un modal pour ajouter un nouvel utilisateur
-    console.log('Add new user');
-    // Exemple de redirection :
-    router.push(`/add-user`);
+    setSelectedUser(null);
+    setIsModalOpen(true);
+  };
+
+  const handleSave = async (user: User) => {
+    const token = localStorage.getItem('token');
+    try {
+      if (user.id) {
+        await axios.put(`http://localhost:8081/users/${user.id}`, user, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } else {
+        await axios.post('http://localhost:8081/users/signup', user, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+      setIsModalOpen(false);
+      const usersResponse = await axios.get('http://localhost:8081/users', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUsers(usersResponse.data);
+    } catch (error) {
+      console.error('Error saving user:', error);
+    }
   };
 
   const filteredUsers = users.filter(user =>
@@ -162,7 +190,7 @@ const AdminDashboard = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap flex items-center space-x-2">
                     <button
-                      onClick={() => handleEdit(user.id)}
+                      onClick={() => handleEdit(user)}
                       className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg transition duration-200 flex items-center"
                     >
                       <FaEdit className="h-5 w-5 mr-1" />
@@ -182,6 +210,12 @@ const AdminDashboard = () => {
           </table>
         </div>
       </div>
+      <UserModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSave}
+        user={selectedUser}
+      />
     </div>
   );
 };

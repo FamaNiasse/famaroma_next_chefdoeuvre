@@ -22,12 +22,14 @@ export default function Header() {
             height={50}
             alt="Heart Icon"
           />
+          <Link href="/login">
           <Image
             src="/assets/icons/icon_user_vert.png"
             width={50}
             height={50}
             alt="User Icon"
           />
+          </Link>
           <Image
             src="/assets/icons/icon_cart_vert.png"
             width={50}
