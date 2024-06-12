@@ -4,12 +4,11 @@ import axios from 'axios';
 import { FaSearch, FaTrashAlt, FaEdit, FaPlus } from 'react-icons/fa';
 import UserModal from '@/components/userModale';
 
-
 interface User {
   id: number;
   pseudo: string;
   email: string;
-  username: string;
+  username: string; // Assurez-vous que cette propriété est nécessaire et utilisée
   role: number;
 }
 
@@ -38,7 +37,7 @@ const AdminDashboard = () => {
 
         const userData = response.data;
         if (userData.role !== 1) {
-          router.push('/dashboard'); // Rediriger les utilisateurs non autorisés vers une autre page
+          router.push('/dashboard');
           return;
         }
 
@@ -93,7 +92,8 @@ const AdminDashboard = () => {
           },
         });
       } else {
-        await axios.post('http://localhost:8081/users/signup', user, {
+        const newUser = { pseudo: user.pseudo, email: user.email, password: "defaultPassword", role: user.role }; // Ajoutez un mot de passe par défaut
+        await axios.post('http://localhost:8081/users/signup', newUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -116,7 +116,7 @@ const AdminDashboard = () => {
   );
 
   if (loading) {
-    return <div>Loading...</div>; // Afficher un message de chargement
+    return <div>Loading...</div>;
   }
 
   return (
