@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { FaEdit, FaSave } from 'react-icons/fa';
+import BackButton from '@/components/backButton';
 
 interface User {
   id: number;
@@ -71,6 +72,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
+      <BackButton/>
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Utilisateur</h2>
         <div className="mb-4">
           <label className="block text-gray-700">Pseudo</label>
