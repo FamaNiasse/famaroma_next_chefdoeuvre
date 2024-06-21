@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 interface UserModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -32,6 +33,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, onSave, user }) 
   if (!isOpen) return null;
 
   return (
+
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold mb-4">{user ? 'Edit User' : 'Add User'}</h1>

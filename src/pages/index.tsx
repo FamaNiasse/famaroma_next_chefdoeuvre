@@ -6,6 +6,7 @@ import React, {useEffect, useState} from 'react';
 
 
 
+
 const HomePage: React.FC = () => {
 
   // const [message, setMessage] = useState("Loading")
@@ -47,7 +48,7 @@ const HomePage: React.FC = () => {
               <p className="font-bold">20,90 €</p>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow-md">
-              <img src="/assets/images/produits/promo_2.png" alt="Product 2" className="w-full"/>
+              <img src="/assets/images/produits/promo_4.png" alt="Product 4" className="w-full"/>
               <button className="mt-2 bg-fuchsia-800 text-white py-2 px-4 rounded">Je découvre</button>
               <p className="mt-2">Indispensable d'une santé en fer</p>
               <p className="font-bold">25,90 €</p>
