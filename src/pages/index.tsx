@@ -9,20 +9,6 @@ import React, {useEffect, useState} from 'react';
 
 const HomePage: React.FC = () => {
 
-  // const [message, setMessage] = useState("Loading")
-
-
-  // useEffect(() =>{
-  //   fetch("http://localhost:8081").then(
-  //     response => response.json()
-  //   ).then(
-  //     data => {
-  //       console.log(data)
-  //       setMessage(data.message)
-  //     }
-  //   )
-  //   // On ouvre un tableau vide pour éviter que la commande ne soit envoyée plusieurs fois
-  // }, [])
 
 
   return (
