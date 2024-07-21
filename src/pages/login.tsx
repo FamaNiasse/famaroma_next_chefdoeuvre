@@ -15,9 +15,22 @@ const Login = () => {
       console.log('Login response:', response.data);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
-        router.push('/admin-dashboard'); // Redirige vers le tableau de bord admin après connexionx
-      }else{
-        router.push('dashboard'); // Redirige vers le tableau de bord user après connexionx
+
+        // Fetch user details to determine role
+        const userResponse = await axios.get('http://localhost:8081/users/me', {
+          headers: {
+            Authorization: `Bearer ${response.data.token}`,
+          },
+        });
+
+        const userData = userResponse.data;
+        if (userData.role === 1) { // role admin = redirection admin dashboard
+          router.push('/admin-dashboard');
+        } else {
+          router.push('/dashboard');
+        }
+      } else {
+        setError('Login failed. Please check your credentials and try again.');
       }
     } catch (error) {
       setError('Login failed. Please check your credentials and try again.');

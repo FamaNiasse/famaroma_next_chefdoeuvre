@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { FaSearch, FaTrashAlt, FaEdit, FaPlus, FaUsers, FaBox } from 'react-icons/fa';
+import { FaSearch, FaTrashAlt, FaEdit, FaPlus, FaUsers, FaBox, FaHospital } from 'react-icons/fa';
 import UserModal from '@/components/userModale';
 import ProductModal from '@/components/productModale';
+import PharmacyModal from '@/components/pharmacyModale';
 import BackButton from '@/components/backButton';
-
 
 interface User {
   id: number;
@@ -24,16 +24,32 @@ interface Product {
   promo: boolean;
 }
 
+interface Pharmacy {
+  id: number;
+  nom_pharmacie: string;
+  numero_voie: number;
+  type_de_voie: string;
+  voie: string;
+  departement: number;
+  ville: string;
+  cp: number;
+  commune: string;
+  telephone: number;
+}
+
 const AdminDashboard = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [pharmacies, setPharmacies] = useState<Pharmacy[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [isPharmacyModalOpen, setIsPharmacyModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [activeTab, setActiveTab] = useState<'users' | 'products'>('users');
+  const [selectedPharmacy, setSelectedPharmacy] = useState<Pharmacy | null>(null);
+  const [activeTab, setActiveTab] = useState<'users' | 'products' | 'pharmacies'>('users');
   const router = useRouter();
 
   useEffect(() => {
@@ -69,8 +85,15 @@ const AdminDashboard = () => {
           },
         });
 
+        const pharmaciesResponse = await axios.get('http://localhost:8081/pharmacy', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         setUsers(usersResponse.data);
         setProducts(productsResponse.data.data);
+        setPharmacies(pharmaciesResponse.data.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -109,6 +132,20 @@ const AdminDashboard = () => {
     }
   };
 
+  const handlePharmacyDelete = async (pharmacyId: number) => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.delete(`http://localhost:8081/pharmacy/${pharmacyId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setPharmacies(pharmacies.filter(pharmacy => pharmacy.id !== pharmacyId));
+    } catch (error) {
+      console.error('Error deleting pharmacy:', error);
+    }
+  };
+
   const handleUserEdit = (user: User) => {
     setSelectedUser(user);
     setIsUserModalOpen(true);
@@ -119,6 +156,11 @@ const AdminDashboard = () => {
     setIsProductModalOpen(true);
   };
 
+  const handlePharmacyEdit = (pharmacy: Pharmacy) => {
+    setSelectedPharmacy(pharmacy);
+    setIsPharmacyModalOpen(true);
+  };
+
   const handleUserAdd = () => {
     setSelectedUser(null);
     setIsUserModalOpen(true);
@@ -127,6 +169,11 @@ const AdminDashboard = () => {
   const handleProductAdd = () => {
     setSelectedProduct(null);
     setIsProductModalOpen(true);
+  };
+
+  const handlePharmacyAdd = () => {
+    setSelectedPharmacy(null);
+    setIsPharmacyModalOpen(true);
   };
 
   const handleUserSave = async (user: User) => {
@@ -186,12 +233,44 @@ const AdminDashboard = () => {
     }
   };
 
+  const handlePharmacySave = async (pharmacy: Pharmacy) => {
+    const token = localStorage.getItem('token');
+    try {
+      if (pharmacy.id) {
+        await axios.put(`http://localhost:8081/pharmacy/${pharmacy.id}`, pharmacy, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } else {
+        await axios.post('http://localhost:8081/pharmacy', pharmacy, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+      setIsPharmacyModalOpen(false);
+      const pharmaciesResponse = await axios.get('http://localhost:8081/pharmacy', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setPharmacies(pharmaciesResponse.data.data);
+    } catch (error) {
+      console.error('Error saving pharmacy:', error);
+    }
+  };
+
   const filteredUsers = users.filter(user =>
     user.pseudo.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const filteredProducts = products.filter(product =>
     product.nom_produit.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredPharmacies = pharmacies.filter(pharmacy =>
+    pharmacy.nom_pharmacie.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
@@ -219,10 +298,17 @@ const AdminDashboard = () => {
           >
             <FaBox className="mr-2" /> Products
           </button>
+          <button
+            className={`flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-fuchsia-800 ${activeTab === 'pharmacies' ? 'bg-fuchsia-800' : ''
+              }`}
+            onClick={() => setActiveTab('pharmacies')}
+          >
+            <FaHospital className="mr-2" /> Pharmacy Partner
+          </button>
         </nav>
       </div>
       <div className="flex-1 p-6">
-      <BackButton />
+        <BackButton />
         {activeTab === 'users' && (
           <>
             <div className="flex justify-between items-center mb-4">
@@ -379,6 +465,87 @@ const AdminDashboard = () => {
             </div>
           </>
         )}
+        {activeTab === 'pharmacies' && (
+          <>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-3xl font-bold text-gray-800">Pharmacy Partner</h2>
+              <div className="relative flex items-center">
+                <input
+                  type="text"
+                  placeholder="Search pharmacies..."
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
+                />
+                <FaSearch className="absolute top-2.5 right-3 h-5 w-5 text-gray-400" />
+              </div>
+              <button
+                onClick={handlePharmacyAdd}
+                className="text-white bg-fuchsia-600 hover:bg-fuchsia-700 px-4 py-2 rounded-lg transition duration-200 ml-4 flex items-center"
+              >
+                <FaPlus className="h-5 w-5 mr-2" />
+                Add Pharmacy
+              </button>
+            </div>
+            <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Pharmacy Name
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Address
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      City
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Postal Code
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {filteredPharmacies.map(pharmacy => (
+                    <tr key={pharmacy.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium text-gray-900">{pharmacy.nom_pharmacie}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{`${pharmacy.numero_voie} ${pharmacy.type_de_voie} ${pharmacy.voie}`}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{pharmacy.ville}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{pharmacy.cp}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap flex items-center space-x-2">
+                        <button
+                          onClick={() => handlePharmacyEdit(pharmacy)}
+                          className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg transition duration-200 flex items-center"
+                        >
+                          <FaEdit className="h-5 w-5 mr-1" />
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handlePharmacyDelete(pharmacy.id)}
+                          className="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg transition duration-200 flex items-center"
+                        >
+                          <FaTrashAlt className="h-5 w-5 mr-1" />
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
       </div>
       <UserModal
         isOpen={isUserModalOpen}
@@ -391,6 +558,12 @@ const AdminDashboard = () => {
         onClose={() => setIsProductModalOpen(false)}
         onSave={handleProductSave}
         product={selectedProduct}
+      />
+      <PharmacyModal
+        isOpen={isPharmacyModalOpen}
+        onClose={() => setIsPharmacyModalOpen(false)}
+        onSave={handlePharmacySave}
+        pharmacy={selectedPharmacy}
       />
     </div>
   );

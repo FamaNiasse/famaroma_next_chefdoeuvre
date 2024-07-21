@@ -63,21 +63,11 @@ const ProductDetailsPage: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.nom_produit}</h1>
           <p className="text-gray-700 mb-4">{product.description}</p>
           <div className="text-2xl font-bold text-gray-900 mb-4">{product.prix} €</div>
-          <div className="flex items-center mb-4">
-            <label className="text-gray-700 mr-2">Quantité:</label>
-            <input
-              type="number"
-              value={quantity}
-              onChange={(e) => setQuantity(parseInt(e.target.value))}
-              className="w-16 px-2 py-1 border rounded-md"
-              min="1"
-            />
-          </div>
           <button
             onClick={handleAddToCart}
             className="bg-fuchsia-800 text-white py-2 px-4 rounded hover:bg-fuchsia-900 transition duration-200"
           >
-            Ajouter au panier
+            Pharmacies partenaires
           </button>
         </div>
       </div>
