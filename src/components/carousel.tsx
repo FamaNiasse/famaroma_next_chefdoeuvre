@@ -2,12 +2,14 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
 import { Navigation, Pagination } from 'swiper/modules';
+import Link from 'next/link';
 
 export default function Carousel() {
   return (
     <section className="my-8">
-      <h2 className="text-2xl font-bold text-center">Best Seller du Jour</h2>
+      <h2 className="text-2xl font-bold text-center">La boutique</h2>
       <div className="my-4">
+        <Link href="/products">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={50}
@@ -89,6 +91,7 @@ export default function Carousel() {
             </div>
           </SwiperSlide>
         </Swiper>
+        </Link>
       </div>
     </section>
   );

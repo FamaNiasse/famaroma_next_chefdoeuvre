@@ -45,22 +45,22 @@ const HomePage: React.FC = () => {
           <h2 className="text-2xl font-bold text-center">Conseils & Astuces</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="bg-gray-100 p-4 rounded shadow-md">
-             <Link href="/besoins" ><img src="/assets/images/pictogrammes/alternatives_saines.png" alt="alternatives_saines" className="w-full"/></Link>
+             <img src="/assets/images/pictogrammes/alternatives_saines.png" alt="alternatives_saines" className="w-full"/>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow-md">
-            <Link href="/besoins" ><img src="/assets/images/pictogrammes/anti_oxydant.png" alt="anti_oxydant" className="w-full"/></Link>
+            <img src="/assets/images/pictogrammes/anti_oxydant.png" alt="anti_oxydant" className="w-full"/>
             </div>
             <div className="bg-gray-100 p-4 rounded shadow-md">
               <img src="/assets/images/pictogrammes/beaute_cheveux.png" alt="beaute_cheveux" className="w-full"/>
             </div>
                <div className="bg-gray-100 p-4 rounded shadow-md">
-               <Link href="/besoins" ><img src="/assets/images/pictogrammes/beaute_minceur.png" alt="beaute_minceur" className="w-full"/></Link>  
+               <img src="/assets/images/pictogrammes/beaute_minceur.png" alt="beaute_minceur" className="w-full"/>  
             </div>
             <div className="bg-gray-100 p-4 rounded shadow-md">
-            <Link href="/besoins" ><img src="/assets/images/pictogrammes/bronzage.png" alt="bronzage" className="w-full"/></Link>     
+            <img src="/assets/images/pictogrammes/bronzage.png" alt="bronzage" className="w-full"/>     
             </div>
             <div className="bg-gray-100 p-4 rounded shadow-md">
-            <Link href="/besoins" ><img src="/assets/images/pictogrammes/cerveau.png" alt="cerveau" className="w-full"/></Link>
+            <img src="/assets/images/pictogrammes/cerveau.png" alt="cerveau" className="w-full"/>
             </div>
           </div>
         </section>

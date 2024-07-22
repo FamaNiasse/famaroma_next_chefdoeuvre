@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaSearch, FaCapsules } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { FaCapsules } from 'react-icons/fa';
 
 interface Pharmacy {
   id: number;
@@ -15,11 +16,12 @@ interface Pharmacy {
   telephone: number | null;
 }
 
-const Partenaires = () => {
+const FilteredPartners = () => {
   const [pharmacies, setPharmacies] = useState<Pharmacy[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const router = useRouter();
+  const { pharmacies: queryPharmacies } = router.query;
 
   useEffect(() => {
     const fetchPharmacies = async () => {
@@ -29,8 +31,17 @@ const Partenaires = () => {
 
         if (response.data && Array.isArray(response.data.data)) {
           const allPharmacies = response.data.data;
-          setPharmacies(allPharmacies);
           console.log('All pharmacies:', allPharmacies);
+
+          if (queryPharmacies) {
+            const pharmacyIds = JSON.parse(queryPharmacies as string);
+            console.log('Query pharmacy IDs:', pharmacyIds);
+            const associatedPharmacies = allPharmacies.filter((pharmacy: { id: any; }) => pharmacyIds.includes(pharmacy.id));
+            setPharmacies(associatedPharmacies);
+            console.log('Filtered pharmacies by query:', associatedPharmacies);
+          } else {
+            setPharmacies([]);
+          }
         } else {
           console.error('Invalid response format:', response.data);
           setError('Invalid response format');
@@ -44,7 +55,7 @@ const Partenaires = () => {
     };
 
     fetchPharmacies();
-  }, []);
+  }, [queryPharmacies]);
 
   const formatPhoneNumber = (phoneNumber: number | null) => {
     if (phoneNumber === null) {
@@ -63,16 +74,6 @@ const Partenaires = () => {
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold mb-4">Pharmacies Partenaires</h1>
-        <div className="relative mb-4">
-          <input
-            type="text"
-            placeholder="Rechercher une pharmacie..."
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-600"
-          />
-          <FaSearch className="absolute top-3 right-3 h-5 w-5 text-gray-400" />
-        </div>
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
@@ -82,11 +83,7 @@ const Partenaires = () => {
             {pharmacies.length === 0 ? (
               <p>No pharmacies found.</p>
             ) : (
-              pharmacies.filter(pharmacy =>
-                pharmacy.nom_pharmacie.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                (pharmacy.voie && pharmacy.voie.toLowerCase().includes(searchTerm.toLowerCase())) ||
-                pharmacy.cp.toString().includes(searchTerm)
-              ).map(pharmacy => (
+              pharmacies.map(pharmacy => (
                 <a
                   key={pharmacy.id}
                   href={createGoogleMapsLink(pharmacy)}
@@ -111,4 +108,4 @@ const Partenaires = () => {
   );
 };
 
-export default Partenaires;
+export default FilteredPartners;
