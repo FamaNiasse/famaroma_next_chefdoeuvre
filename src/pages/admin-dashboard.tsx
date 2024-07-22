@@ -278,29 +278,26 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
-      <div className="w-64 bg-fuchsia-700 text-white">
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
+      <div className="w-full md:w-80 bg-fuchsia-700 text-white flex md:flex-col items-center md:items-start md:justify-start">
         <div className="p-4">
           <h1 className="text-xl font-bold">Admin Dashboard</h1>
         </div>
-        <nav className="mt-4">
+        <nav className="flex md:flex-col mt-4 w-full">
           <button
-            className={`flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-fuchsia-800 ${activeTab === 'users' ? 'bg-fuchsia-800' : ''
-              }`}
+            className={`flex items-center py-2.5 px-4 w-full rounded transition duration-200 hover:bg-fuchsia-800 ${activeTab === 'users' ? 'bg-fuchsia-800' : ''}`}
             onClick={() => setActiveTab('users')}
           >
             <FaUsers className="mr-2" /> Users
           </button>
           <button
-            className={`flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-fuchsia-800 ${activeTab === 'products' ? 'bg-fuchsia-800' : ''
-              }`}
+            className={`flex items-center py-2.5 px-4 w-full rounded transition duration-200 hover:bg-fuchsia-800 ${activeTab === 'products' ? 'bg-fuchsia-800' : ''}`}
             onClick={() => setActiveTab('products')}
           >
             <FaBox className="mr-2" /> Products
           </button>
           <button
-            className={`flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-fuchsia-800 ${activeTab === 'pharmacies' ? 'bg-fuchsia-800' : ''
-              }`}
+            className={`flex items-center py-2.5 px-4 w-full rounded transition duration-200 hover:bg-fuchsia-800 ${activeTab === 'pharmacies' ? 'bg-fuchsia-800' : ''}`}
             onClick={() => setActiveTab('pharmacies')}
           >
             <FaHospital className="mr-2" /> Pharmacy Partner
@@ -311,9 +308,9 @@ const AdminDashboard = () => {
         <BackButton />
         {activeTab === 'users' && (
           <>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
               <h2 className="text-3xl font-bold text-gray-800">Users</h2>
-              <div className="relative flex items-center">
+              <div className="relative flex items-center mt-4 md:mt-0">
                 <input
                   type="text"
                   placeholder="Search users..."
@@ -325,7 +322,7 @@ const AdminDashboard = () => {
               </div>
               <button
                 onClick={handleUserAdd}
-                className="text-white bg-fuchsia-600 hover:bg-fuchsia-700 px-4 py-2 rounded-lg transition duration-200 ml-4 flex items-center"
+                className="text-white bg-fuchsia-600 hover:bg-fuchsia-700 px-4 py-2 rounded-lg transition duration-200 mt-4 md:mt-0 md:ml-4 flex items-center"
               >
                 <FaPlus className="h-5 w-5 mr-2" />
                 Add User
@@ -335,18 +332,10 @@ const AdminDashboard = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Name
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Email
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Username
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -386,9 +375,9 @@ const AdminDashboard = () => {
         )}
         {activeTab === 'products' && (
           <>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
               <h2 className="text-3xl font-bold text-gray-800">Products</h2>
-              <div className="relative flex items-center">
+              <div className="relative flex items-center mt-4 md:mt-0">
                 <input
                   type="text"
                   placeholder="Search products..."
@@ -400,7 +389,7 @@ const AdminDashboard = () => {
               </div>
               <button
                 onClick={handleProductAdd}
-                className="text-white bg-fuchsia-600 hover:bg-fuchsia-700 px-4 py-2 rounded-lg transition duration-200 ml-4 flex items-center"
+                className="text-white bg-fuchsia-600 hover:bg-fuchsia-700 px-4 py-2 rounded-lg transition duration-200 mt-4 md:mt-0 md:ml-4 flex items-center"
               >
                 <FaPlus className="h-5 w-5 mr-2" />
                 Add Product
@@ -410,21 +399,11 @@ const AdminDashboard = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Product Name
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Description
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Price
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Promo
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product Name</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Promo</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -467,9 +446,9 @@ const AdminDashboard = () => {
         )}
         {activeTab === 'pharmacies' && (
           <>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
               <h2 className="text-3xl font-bold text-gray-800">Pharmacy Partner</h2>
-              <div className="relative flex items-center">
+              <div className="relative flex items-center mt-4 md:mt-0">
                 <input
                   type="text"
                   placeholder="Search pharmacies..."
@@ -481,7 +460,7 @@ const AdminDashboard = () => {
               </div>
               <button
                 onClick={handlePharmacyAdd}
-                className="text-white bg-fuchsia-600 hover:bg-fuchsia-700 px-4 py-2 rounded-lg transition duration-200 ml-4 flex items-center"
+                className="text-white bg-fuchsia-600 hover:bg-fuchsia-700 px-4 py-2 rounded-lg transition duration-200 mt-4 md:mt-0 md:ml-4 flex items-center"
               >
                 <FaPlus className="h-5 w-5 mr-2" />
                 Add Pharmacy
@@ -491,21 +470,11 @@ const AdminDashboard = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Pharmacy Name
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Address
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      City
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Postal Code
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pharmacy Name</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Postal Code</th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
