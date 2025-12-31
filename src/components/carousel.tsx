@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function Carousel() {
   return (
     <section className="my-8">
-      <h2 className="text-2xl font-bold text-center">La boutique</h2>
+      <h2 className="text-2xl font-bold text-center">Afficher tous les produits</h2>
       <div className="my-4">
         <Link href="/products">
         <Swiper
