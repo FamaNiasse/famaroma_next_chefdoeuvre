@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { jwtDecode } from 'jwt-decode';
+
+
+interface JwtPayload {
+  role: number;
+}
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -16,15 +22,11 @@ const Login = () => {
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
 
-        // Fetch user details to determine role
-        const userResponse = await axios.get('http://localhost:8081/users/me', {
-          headers: {
-            Authorization: `Bearer ${response.data.token}`,
-          },
-        });
+        // Decode the token to get user information
+        const decodedToken = jwtDecode<JwtPayload>(response.data.token);
+        console.log('Decoded Token:', decodedToken);
 
-        const userData = userResponse.data;
-        if (userData.role === 1) { // role admin = redirection admin dashboard
+        if (decodedToken.role === 1) { // role admin = redirection admin dashboard
           router.push('/admin-dashboard');
         } else {
           router.push('/dashboard');
